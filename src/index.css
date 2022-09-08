@@ -140,7 +140,7 @@ header h1 {
     font-size: 1.8rem;
     text-align: center;
 }
-.alerta.error {
+.error {
     background-color: var(--blanco);
     border-left: 5px solid #b91c1c;
     color: #b91c1c;

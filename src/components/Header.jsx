@@ -22,8 +22,8 @@ const Header = ({
             presupuesto= {presupuesto}
             setPresupuesto= {setPresupuesto}
             setIsValiPresupuesto= {setIsValiPresupuesto}
-          />)
-      }
+          />
+        )}
         
     </header>
   )
