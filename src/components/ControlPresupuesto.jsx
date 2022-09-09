@@ -1,6 +1,18 @@
-import React from 'react'
+import {useEffect, useState} from 'react'
 
-const ControlPresupuesto = ({presupuesto}) => {
+const ControlPresupuesto = ({presupuesto, gastos}) => {
+
+    const [disponible, setDisponible] = useState(0);
+    const [gastado, setGastado] = useState(0);
+
+    useEffect(() =>{
+        const totalGastado= gastos.reduce((total, gasto) => gasto.cantidadGasto + total, 0);
+        const totalDisponible= presupuesto - totalGastado
+            
+            setDisponible(totalDisponible)
+            setGastado(totalGastado)
+    }, [gastos])
+
 return (
     <div className='contenedor-presupuesto contenedor sombra dos-columnas'>
         <div>
@@ -14,15 +26,15 @@ return (
             </p>
             <p>
                 <span>Disponible: </span>
-                ${presupuesto}
+                ${disponible}
             </p>
             <p>
                 <span>Gastado: </span>
-                ${presupuesto}
+                ${gastado}
             </p>
         </div>
     </div>
-  )
+)
 }
 
 export default ControlPresupuesto

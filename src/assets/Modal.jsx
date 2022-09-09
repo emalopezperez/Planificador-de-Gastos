@@ -1,16 +1,31 @@
-import { useState } from 'react'
+import { useState ,useEffect } from 'react'
 import cerrarBtn from '../img/cerrar.svg'
 import Mensajes from './Mensajes'
 
-const Modal =({setModal, animarModal,setAnimarModal, guardarGasto}) => {
-    const [mensaje, setMensaje] = useState('')
+const Modal =({setModal, animarModal,setAnimarModal, guardarGasto, editar, setEditar}) => {
 
+    const [mensaje, setMensaje] = useState('')
     const [nombreGasto, setNombreGasto]= useState('')
     const [cantidadGasto, setCantidadGasto]= useState('')
     const [categoria, setCategoria]= useState('')
+    const [fecha, setFecha]= useState ('')
+    const [id, setId] = useState('')
+
+
+    useEffect(() => {
+        if(Object.keys(editar).length > 0){
+
+            setNombreGasto(editar.nombreGasto)
+            setCantidadGasto(editar.cantidadGasto)
+            setCategoria(editar.categoria)
+            setId(editar.id)
+            setFecha(editar.fecha)
+        }
+    }, [])
 
     const ocultarModal= ()=>{
         setAnimarModal(false)
+        setEditar({})
 
         setTimeout(() => {
             setModal(false)
@@ -29,7 +44,7 @@ const Modal =({setModal, animarModal,setAnimarModal, guardarGasto}) => {
             },800)  
             return;
         }
-        guardarGasto({nombreGasto , cantidadGasto ,categoria})
+        guardarGasto({nombreGasto , cantidadGasto ,categoria, id, fecha})
     }
 
 return (
@@ -47,7 +62,7 @@ return (
             className={`formulario ${animarModal ? 'animar' : 'cerrar' } `}
         >
             <legend>
-                Nuevo Gasto
+                {editar.nombreGasto ? 'Editar Gasto' : 'Nuevo Gasto'}
             </legend>
             {mensaje&& <Mensajes tipo='error'>{mensaje}</Mensajes>}
             <div className='campo'>
@@ -91,7 +106,7 @@ return (
 
             <input
                 type='submit'
-                value='Anadir Gastos'
+                value= {editar.nombreGasto ? 'Guardar cambios' : 'Agregar'}
             />
         </form>
     </div>

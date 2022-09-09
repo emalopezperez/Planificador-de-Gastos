@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import iconoGastoNuevo from './img/nuevo-gasto.svg'
 import Modal from './assets/Modal';
@@ -14,9 +14,21 @@ function App() {
   const [animarModal, setAnimarModal] = useState (false)
 
   const [gastos, setGastos] = useState([])
+  const [editar, setEditar] = useState ({})
+
+  useEffect(() =>{
+    if(Object.keys(editar).length > 0){
+      setModal(true)
+
+    setTimeout(() =>{
+      setAnimarModal(true)
+    },400)
+  }
+}, [editar])
 
   const handleNuevoGasto=() =>{
     setModal(true)
+    setEditar({})
 
     setTimeout(() =>{
       setAnimarModal(true)
@@ -24,20 +36,32 @@ function App() {
   }
 
   const guardarGasto= gasto =>{
-    gasto.id = generarId();
-    gasto.fecha = Date.now();
 
-    setGastos([...gastos, gasto])
+    if(gasto.id){
+      const gastosActualizados = gastos.map(e => e.id === gasto.id ? gasto : e)
+      setGastos(gastosActualizados)
+    }else{
+      gasto.id = generarId();
+      gasto.fecha = Date.now();
+      setGastos([...gastos, gasto])
+    }
 
     setAnimarModal(false)
-
         setTimeout(() => {
             setModal(false)
         },400)
 }
+
+  const eliminar = id =>{
+    const eliminados = gastos.filter(e => e.id !== id)
+
+    setGastos(eliminados)
+}
+
   return (
-    <div className={modal && 'fijar'}>
+    <div className={modal ? 'fijar' : "" }>
       <Header
+        gastos={gastos}
         presupuesto= {presupuesto}
         setPresupuesto= {setPresupuesto}
         isValiPresupuesto= {isValiPresupuesto}
@@ -50,6 +74,8 @@ function App() {
             {
               <ListaDeGastos
                 gastos={gastos}
+                setEditar={setEditar}
+                eliminar={eliminar}
               />
             }
           </main>
@@ -69,6 +95,8 @@ function App() {
           animarModal= {animarModal}
           setAnimarModal= {setAnimarModal}
           guardarGasto= {guardarGasto}
+          editar={editar}
+          setEditar={setEditar}
         />
     )}
 
