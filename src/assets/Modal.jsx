@@ -37,11 +37,11 @@ const Modal =({setModal, animarModal,setAnimarModal, guardarGasto, editar, setEd
         
         if([nombreGasto, cantidadGasto ,categoria].includes('')){
 
-            setMensaje('Todos los cmapos son obligatorios')
+            setMensaje('Campos sin llenar!')
 
             setTimeout(() =>{
                 setMensaje('')
-            },800)  
+            },900)  
             return;
         }
         guardarGasto({nombreGasto , cantidadGasto ,categoria, id, fecha})

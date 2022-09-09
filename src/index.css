@@ -1,5 +1,5 @@
 :root {
-    --azul: #0b2145;
+    --azul: #0f1728;
     --blanco: #ffffff;
     --gris-claro: #f5f5f5;
     --gris: #94a3b8;
@@ -28,10 +28,11 @@ html {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3rem;
+    font-family: serif;
 }
 h2 {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .sombra {
@@ -99,7 +100,7 @@ header h1 {
     font-size: 1.6rem;
 }
 .formulario input[type="submit"] {
-    background-color: #1048a4;
+    background-color: #061e45;
     border: none;
     padding: 1rem;
     text-align: center;
@@ -136,12 +137,13 @@ header h1 {
     max-width: 60rem;
     margin: 2rem auto 2rem auto;
     font-weight: 900;
-    text-transform: uppercase;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     text-align: center;
+    border-left: 5px solid #b91c1c;
+    color: #7e0d0d
 }
 .error {
-    background-color: var(--blanco);
+    
     border-left: 5px solid #b91c1c;
     color: #b91c1c;
 }
@@ -213,8 +215,8 @@ header h1 {
 }
 .reset-app {
     border: none;
-    background-color: #db2777;
-    padding: 1rem;
+    background-color: rgb(91, 22, 22);
+    padding: 3px;
     width: 100%;
     text-align: center;
     color: var(--blanco);
@@ -225,7 +227,7 @@ header h1 {
     transition-duration: 300ms;
 }
 .reset-app:hover {
-    background-color: #c71465;
+    background-color: rgb(136, 45, 45);
     cursor: pointer;
 }
 
@@ -320,8 +322,8 @@ main {
 
 .nuevo-gasto {
     position: fixed;
-    bottom: 5rem;
-    right: 5rem;
+    bottom: 3rem;
+    right: 2rem;
 }
 
 .nuevo-gasto img {
@@ -390,7 +392,7 @@ body .modal {
 }
 
 .swipe-action__trailing {
-    background-color: #db2777;
+    background-color: #700f3c;
     margin-bottom: 2rem;
     color: var(--blanco);
 }
